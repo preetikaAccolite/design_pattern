@@ -1,52 +1,60 @@
-// Product Interface
-interface Product {
-	void display();
+import java.util.*;
+interface Furniture{
+    int getPrice();
 }
-
-// Concrete Products
-class ConcreteProductA implements Product {
-	@Override
-	public void display() {
-		System.out.println("This is Concrete Product A.");
-	}
+class Table implements Furniture{
+    public int getPrice(){
+        System.out.println("the price of table furniture is:");
+        return 50000;
+    }
 }
-
-class ConcreteProductB implements Product {
-	@Override
-	public void display() {
-		System.out.println("This is Concrete Product B.");
-	}
+class Chair implements Furniture{
+    public int getPrice(){
+        System.out.println("the price of chair furniture is:");
+        return 20000;
+    }
 }
-
-// Factory Interface
-interface Factory {
-	Product factoryMethod();
+class Bed implements Furniture{
+    public int getPrice(){
+        System.out.println("the price of bed furniture is:");
+        return 90000;
+    }
 }
-
-// Concrete Factories
-class ConcreteFactoryA implements Factory {
-	@Override
-	public Product factoryMethod() {
-		return new ConcreteProductA();
-	}
+public class customer{
+   public static void main(String[] args){
+        System.out.println("To find out the price of furniture enter any of the below string:1 Table,2 Chair, 3 Bed");
+        Scanner sc=new Scanner(System.in);
+        String a=sc.nextLine();
+        switch(a){
+            case "table":Furniture cs1=customerfactory.getfurniture("table");
+                      int price1=cs1.getPrice();
+                      System.out.println(price1);
+                      break;
+            case "chair":Furniture cs2=customerfactory.getfurniture("chair");
+                      int price2=cs2.getPrice();
+                      System.out.println(price2); 
+                      break;
+            case "bed":Furniture cs3=customerfactory.getfurniture("bed");
+                      int price3=cs3.getPrice();
+                      System.out.println(price3);  
+                      break;
+        }
+    }
 }
-
-class ConcreteFactoryB implements Factory {
-	@Override
-	public Product factoryMethod() {
-		return new ConcreteProductB();
-	}
-}
-
-// Client Code
-public class FactoryMethodExample {
-	public static void main(String[] args) {
-		Factory factoryA = new ConcreteFactoryA();
-		Product productA = factoryA.factoryMethod();
-		productA.display();
-
-		Factory factoryB = new ConcreteFactoryB();
-		Product productB = factoryB.factoryMethod();
-		productB.display();
-	}
+class customerfactory{
+    public static Furniture getfurniture(String FType){
+        if(FType.trim().equalsIgnoreCase("table")){
+            return new Table();
+        }
+        else if(FType.trim().equalsIgnoreCase("chair")){
+            return new Chair();
+        }
+        else if(FType.trim().equalsIgnoreCase("bed")){
+            return new Bed();
+        }
+        else{
+            return null;
+        }
+        
+    }
 }
